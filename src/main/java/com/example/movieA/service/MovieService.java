@@ -26,11 +26,15 @@ public class MovieService {
         return movieRepository.findById(id);
     }
 
-    public List<Movie> searchMoviesByTitle(String title) {
-        return movieRepository.findByTitleContainingIgnoreCase(title);
-    }
-
     public Movie saveMovie(Movie movie) {
         return movieRepository.save(movie);
+    }
+
+    public boolean deleteMovie(Long id) {
+        if (movieRepository.existsById(id)) {
+            movieRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
